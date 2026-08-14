@@ -1,0 +1,443 @@
+{
+  "generated_at": "2026-08-14T09:36:49Z",
+  "overview": {
+    "nb_clients": 4000,
+    "nb_transactions": 7596,
+    "nb_marches": 5,
+    "clv_moyenne_eur": 37330.0,
+    "part_omnicanal_pct": 37.8,
+    "taux_actifs_6m_pct": 71.4,
+    "part_vic_pct": 17.4,
+    "montant_total_eur": 149321513.0,
+    "taux_retention_12m_pct": 18.8
+  },
+  "clv_par_marche_tier": [
+    {
+      "market": "France (siège)",
+      "tier": "Découverte",
+      "nb_clients": 470,
+      "clv_moyenne_eur": 6311.0,
+      "clv_mediane_eur": 2231.0,
+      "transactions_moyennes": 1.2
+    },
+    {
+      "market": "France (siège)",
+      "tier": "Client fidèle",
+      "nb_clients": 312,
+      "clv_moyenne_eur": 34901.0,
+      "clv_mediane_eur": 32696.0,
+      "transactions_moyennes": 2.4
+    },
+    {
+      "market": "France (siège)",
+      "tier": "VIC",
+      "nb_clients": 148,
+      "clv_moyenne_eur": 118914.0,
+      "clv_mediane_eur": 113926.0,
+      "transactions_moyennes": 2.8
+    },
+    {
+      "market": "France (siège)",
+      "tier": "Very VIP",
+      "nb_clients": 10,
+      "clv_moyenne_eur": 276917.0,
+      "clv_mediane_eur": 272286.0,
+      "transactions_moyennes": 3.4
+    },
+    {
+      "market": "USA",
+      "tier": "Découverte",
+      "nb_clients": 438,
+      "clv_moyenne_eur": 6006.0,
+      "clv_mediane_eur": 1770.0,
+      "transactions_moyennes": 1.2
+    },
+    {
+      "market": "USA",
+      "tier": "Client fidèle",
+      "nb_clients": 329,
+      "clv_moyenne_eur": 34571.0,
+      "clv_mediane_eur": 32272.0,
+      "transactions_moyennes": 2.4
+    },
+    {
+      "market": "USA",
+      "tier": "VIC",
+      "nb_clients": 158,
+      "clv_moyenne_eur": 116291.0,
+      "clv_mediane_eur": 112236.0,
+      "transactions_moyennes": 2.7
+    },
+    {
+      "market": "USA",
+      "tier": "Very VIP",
+      "nb_clients": 9,
+      "clv_moyenne_eur": 249370.0,
+      "clv_mediane_eur": 246860.0,
+      "transactions_moyennes": 3.4
+    },
+    {
+      "market": "Japon",
+      "tier": "Découverte",
+      "nb_clients": 305,
+      "clv_moyenne_eur": 6364.0,
+      "clv_mediane_eur": 2771.0,
+      "transactions_moyennes": 1.2
+    },
+    {
+      "market": "Japon",
+      "tier": "Client fidèle",
+      "nb_clients": 216,
+      "clv_moyenne_eur": 34771.0,
+      "clv_mediane_eur": 31746.0,
+      "transactions_moyennes": 2.4
+    },
+    {
+      "market": "Japon",
+      "tier": "VIC",
+      "nb_clients": 90,
+      "clv_moyenne_eur": 111522.0,
+      "clv_mediane_eur": 107823.0,
+      "transactions_moyennes": 3.0
+    },
+    {
+      "market": "Japon",
+      "tier": "Very VIP",
+      "nb_clients": 7,
+      "clv_moyenne_eur": 272844.0,
+      "clv_mediane_eur": 264235.0,
+      "transactions_moyennes": 3.6
+    },
+    {
+      "market": "Chine",
+      "tier": "Découverte",
+      "nb_clients": 404,
+      "clv_moyenne_eur": 5963.0,
+      "clv_mediane_eur": 1532.0,
+      "transactions_moyennes": 1.1
+    },
+    {
+      "market": "Chine",
+      "tier": "Client fidèle",
+      "nb_clients": 333,
+      "clv_moyenne_eur": 34964.0,
+      "clv_mediane_eur": 32590.0,
+      "transactions_moyennes": 2.5
+    },
+    {
+      "market": "Chine",
+      "tier": "VIC",
+      "nb_clients": 149,
+      "clv_moyenne_eur": 114885.0,
+      "clv_mediane_eur": 107993.0,
+      "transactions_moyennes": 2.7
+    },
+    {
+      "market": "Chine",
+      "tier": "Very VIP",
+      "nb_clients": 18,
+      "clv_moyenne_eur": 274025.0,
+      "clv_mediane_eur": 256891.0,
+      "transactions_moyennes": 3.7
+    },
+    {
+      "market": "Moyen-Orient",
+      "tier": "Découverte",
+      "nb_clients": 277,
+      "clv_moyenne_eur": 5266.0,
+      "clv_mediane_eur": 1143.0,
+      "transactions_moyennes": 1.2
+    },
+    {
+      "market": "Moyen-Orient",
+      "tier": "Client fidèle",
+      "nb_clients": 220,
+      "clv_moyenne_eur": 34233.0,
+      "clv_mediane_eur": 31549.0,
+      "transactions_moyennes": 2.3
+    },
+    {
+      "market": "Moyen-Orient",
+      "tier": "VIC",
+      "nb_clients": 97,
+      "clv_moyenne_eur": 112179.0,
+      "clv_mediane_eur": 101576.0,
+      "transactions_moyennes": 2.7
+    },
+    {
+      "market": "Moyen-Orient",
+      "tier": "Very VIP",
+      "nb_clients": 10,
+      "clv_moyenne_eur": 310264.0,
+      "clv_mediane_eur": 315229.0,
+      "transactions_moyennes": 4.2
+    }
+  ],
+  "harmonisation_marches": [
+    {
+      "market": "Chine",
+      "nb_clients": 904,
+      "clv_moyenne_eur": 39936.0,
+      "part_vic_pct": 18.5,
+      "part_omnicanal_pct": 39.0,
+      "taux_actifs_pct": 71.5,
+      "part_acquisition_digitale_pct": 18.3,
+      "transactions_moyennes": 1.94
+    },
+    {
+      "market": "Moyen-Orient",
+      "nb_clients": 604,
+      "clv_moyenne_eur": 38037.0,
+      "part_vic_pct": 17.7,
+      "part_omnicanal_pct": 33.6,
+      "taux_actifs_pct": 72.0,
+      "part_acquisition_digitale_pct": 18.9,
+      "transactions_moyennes": 1.87
+    },
+    {
+      "market": "USA",
+      "nb_clients": 934,
+      "clv_moyenne_eur": 37069.0,
+      "part_vic_pct": 17.9,
+      "part_omnicanal_pct": 38.9,
+      "taux_actifs_pct": 70.9,
+      "part_acquisition_digitale_pct": 20.6,
+      "transactions_moyennes": 1.89
+    },
+    {
+      "market": "France (siège)",
+      "nb_clients": 940,
+      "clv_moyenne_eur": 36408.0,
+      "part_vic_pct": 16.8,
+      "part_omnicanal_pct": 37.2,
+      "taux_actifs_pct": 71.2,
+      "part_acquisition_digitale_pct": 19.3,
+      "transactions_moyennes": 1.87
+    },
+    {
+      "market": "Japon",
+      "nb_clients": 618,
+      "clv_moyenne_eur": 34625.0,
+      "part_vic_pct": 15.7,
+      "part_omnicanal_pct": 39.3,
+      "taux_actifs_pct": 72.0,
+      "part_acquisition_digitale_pct": 19.7,
+      "transactions_moyennes": 1.94
+    }
+  ],
+  "mix_omnicanal": [
+    {
+      "market": "France (siège)",
+      "segment": "Mono-canal",
+      "nb_clients": 504,
+      "clv_moyenne_eur": 27225.0
+    },
+    {
+      "market": "France (siège)",
+      "segment": "Omnicanal",
+      "nb_clients": 350,
+      "clv_moyenne_eur": 58578.0
+    },
+    {
+      "market": "USA",
+      "segment": "Mono-canal",
+      "nb_clients": 485,
+      "clv_moyenne_eur": 30483.0
+    },
+    {
+      "market": "USA",
+      "segment": "Omnicanal",
+      "nb_clients": 363,
+      "clv_moyenne_eur": 54652.0
+    },
+    {
+      "market": "Japon",
+      "segment": "Mono-canal",
+      "nb_clients": 314,
+      "clv_moyenne_eur": 25478.0
+    },
+    {
+      "market": "Japon",
+      "segment": "Omnicanal",
+      "nb_clients": 243,
+      "clv_moyenne_eur": 55137.0
+    },
+    {
+      "market": "Chine",
+      "segment": "Mono-canal",
+      "nb_clients": 461,
+      "clv_moyenne_eur": 30715.0
+    },
+    {
+      "market": "Chine",
+      "segment": "Omnicanal",
+      "nb_clients": 353,
+      "clv_moyenne_eur": 62161.0
+    },
+    {
+      "market": "Moyen-Orient",
+      "segment": "Mono-canal",
+      "nb_clients": 340,
+      "clv_moyenne_eur": 27839.0
+    },
+    {
+      "market": "Moyen-Orient",
+      "segment": "Omnicanal",
+      "nb_clients": 203,
+      "clv_moyenne_eur": 66546.0
+    }
+  ],
+  "aov_frequence": [
+    {
+      "category": "Haute Joaillerie",
+      "nb_clients_acheteurs": 522,
+      "panier_moyen_eur": 113856.0,
+      "frequence_moyenne": 1.06
+    },
+    {
+      "category": "Horlogerie",
+      "nb_clients_acheteurs": 1018,
+      "panier_moyen_eur": 29842.0,
+      "frequence_moyenne": 1.13
+    },
+    {
+      "category": "Joaillerie",
+      "nb_clients_acheteurs": 1722,
+      "panier_moyen_eur": 16392.0,
+      "frequence_moyenne": 1.31
+    },
+    {
+      "category": "Mariage",
+      "nb_clients_acheteurs": 935,
+      "panier_moyen_eur": 12080.0,
+      "frequence_moyenne": 1.1
+    },
+    {
+      "category": "Accessoires & Parfums",
+      "nb_clients_acheteurs": 1964,
+      "panier_moyen_eur": 863.0,
+      "frequence_moyenne": 1.32
+    }
+  ],
+  "cohortes_retention": [
+    {
+      "month_number": 1,
+      "retention_pct": 0.5
+    },
+    {
+      "month_number": 2,
+      "retention_pct": 0.7
+    },
+    {
+      "month_number": 3,
+      "retention_pct": 4.3
+    },
+    {
+      "month_number": 4,
+      "retention_pct": 17.6
+    },
+    {
+      "month_number": 5,
+      "retention_pct": 41.1
+    },
+    {
+      "month_number": 6,
+      "retention_pct": 31.5
+    },
+    {
+      "month_number": 7,
+      "retention_pct": 8.7
+    },
+    {
+      "month_number": 8,
+      "retention_pct": 7.0
+    },
+    {
+      "month_number": 9,
+      "retention_pct": 13.6
+    },
+    {
+      "month_number": 10,
+      "retention_pct": 23.9
+    },
+    {
+      "month_number": 11,
+      "retention_pct": 25.0
+    },
+    {
+      "month_number": 12,
+      "retention_pct": 18.8
+    }
+  ],
+  "rfm_segments": [
+    {
+      "segment": "Champions",
+      "nb_clients": 482,
+      "montant_moyen_eur": 88136.0,
+      "recence_moyenne_jours": 31.0,
+      "frequence_moyenne": 3.51
+    },
+    {
+      "segment": "Clients fidèles",
+      "nb_clients": 951,
+      "montant_moyen_eur": 43820.0,
+      "recence_moyenne_jours": 57.0,
+      "frequence_moyenne": 2.64
+    },
+    {
+      "segment": "Prometteurs",
+      "nb_clients": 485,
+      "montant_moyen_eur": 19696.0,
+      "recence_moyenne_jours": 35.0,
+      "frequence_moyenne": 1.07
+    },
+    {
+      "segment": "Standard",
+      "nb_clients": 434,
+      "montant_moyen_eur": 17388.0,
+      "recence_moyenne_jours": 116.0,
+      "frequence_moyenne": 1.55
+    },
+    {
+      "segment": "À risque",
+      "nb_clients": 563,
+      "montant_moyen_eur": 60318.0,
+      "recence_moyenne_jours": 155.0,
+      "frequence_moyenne": 2.61
+    },
+    {
+      "segment": "Perdus",
+      "nb_clients": 701,
+      "montant_moyen_eur": 20127.0,
+      "recence_moyenne_jours": 218.0,
+      "frequence_moyenne": 1.04
+    }
+  ],
+  "touchpoints_summary": [
+    {
+      "type": "Appel conseiller de vente",
+      "nb": 3147,
+      "part_pct": 20.6
+    },
+    {
+      "type": "Événement VIC",
+      "nb": 3107,
+      "part_pct": 20.3
+    },
+    {
+      "type": "Ouverture newsletter",
+      "nb": 3050,
+      "part_pct": 20.0
+    },
+    {
+      "type": "Visite site e-commerce",
+      "nb": 3007,
+      "part_pct": 19.7
+    },
+    {
+      "type": "Rendez-vous boutique",
+      "nb": 2977,
+      "part_pct": 19.5
+    }
+  ]
+}

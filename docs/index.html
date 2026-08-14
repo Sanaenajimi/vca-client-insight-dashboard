@@ -1,0 +1,881 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Client Insight &amp; Data — Portfolio Data Analyst</title>
+<meta name="description" content="Portfolio technique — Data Analyst, Client Insight &amp; Data. Données 100% simulées.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+  (function () {
+    var stored = localStorage.getItem('vca-theme');
+    var isDark = stored ? stored === 'dark' : false;
+    if (isDark) document.documentElement.classList.add('dark');
+  })();
+</script>
+<style>
+  :root {
+    --ivory: oklch(97% 0.015 85);
+    --ivory-deep: oklch(93.5% 0.02 82);
+    --surface: var(--ivory);
+    --surface-card: oklch(99% 0.006 85);
+    --surface-card-2: oklch(95.5% 0.016 83);
+    --ink: oklch(21% 0.018 60);
+    --ink-soft: oklch(40% 0.018 60);
+    --text: var(--ink);
+    --text-soft: var(--ink-soft);
+    --stone-line: oklch(86% 0.012 80);
+    --border: var(--stone-line);
+
+    --gold: oklch(58% 0.12 73);
+    --gold-deep: oklch(44% 0.10 68);
+    --c-stone: oklch(63% 0.015 80);
+    --c-sage: oklch(48% 0.055 148);
+    --c-amber: oklch(58% 0.14 55);
+    --c-garnet: oklch(33% 0.105 22);
+
+    --tier-1: oklch(72% 0.018 80);
+    --tier-2: oklch(60% 0.05 88);
+    --tier-3: oklch(55% 0.10 74);
+    --tier-4: oklch(48% 0.13 68);
+
+    --shadow: 0 1px 2px oklch(30% 0.02 60 / 0.06), 0 8px 24px oklch(30% 0.02 60 / 0.06);
+    --radius: 4px;
+    --serif: 'Fraunces', Georgia, serif;
+    --sans: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  }
+
+  html.dark {
+    --surface: oklch(15.5% 0.014 60);
+    --surface-card: oklch(19.5% 0.017 58);
+    --surface-card-2: oklch(23% 0.02 58);
+    --ink: oklch(93% 0.014 85);
+    --ink-soft: oklch(76% 0.018 82);
+    --stone-line: oklch(31% 0.02 60);
+
+    --gold: oklch(74% 0.13 76);
+    --gold-deep: oklch(66% 0.13 74);
+    --c-stone: oklch(66% 0.016 82);
+    --c-sage: oklch(63% 0.07 148);
+    --c-amber: oklch(68% 0.15 58);
+    --c-garnet: oklch(56% 0.13 24);
+
+    --tier-1: oklch(42% 0.02 82);
+    --tier-2: oklch(54% 0.06 88);
+    --tier-3: oklch(64% 0.11 74);
+    --tier-4: oklch(75% 0.14 70);
+
+    --shadow: 0 1px 2px oklch(0% 0 0 / 0.3), 0 12px 32px oklch(0% 0 0 / 0.35);
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--surface);
+    color: var(--text);
+    font-family: var(--sans);
+    -webkit-font-smoothing: antialiased;
+    transition: background .25s ease, color .25s ease;
+  }
+  .wrap { max-width: 1180px; margin: 0 auto; padding: 0 32px; }
+  a { color: inherit; }
+  img { max-width: 100%; display: block; }
+
+  h1, h2, h3, .serif { font-family: var(--serif); font-weight: 500; letter-spacing: -0.01em; }
+
+  /* ---------- Top bar ---------- */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in oklch, var(--surface) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; height: 68px; }
+  .brand { display: flex; align-items: center; gap: 12px; font-family: var(--serif); font-size: 17px; letter-spacing: 0.01em; }
+  .brand .mark { width: 26px; height: 26px; flex-shrink: 0; }
+  .brand .word b { font-weight: 600; color: var(--gold-deep); }
+  html.dark .brand .word b { color: var(--gold); }
+  .brand .word small { display: block; font-family: var(--sans); font-size: 10.5px; letter-spacing: 0.14em; text-transform: uppercase; color: var(--text-soft); margin-top: 1px; }
+
+  .theme-toggle {
+    display: inline-flex; align-items: center; justify-content: center;
+    width: 38px; height: 38px; border-radius: 50%;
+    border: 1px solid var(--border); background: var(--surface-card);
+    cursor: pointer; color: var(--text);
+  }
+  .theme-toggle:hover { border-color: var(--gold); }
+  .theme-toggle svg { width: 17px; height: 17px; }
+  .theme-toggle .sun { display: none; }
+  html.dark .theme-toggle .moon { display: none; }
+  html.dark .theme-toggle .sun { display: block; }
+
+  /* ---------- Hero ---------- */
+  .hero { position: relative; overflow: hidden; padding: 84px 0 56px; }
+  .hero .wrap { position: relative; display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 40px; align-items: center; }
+  .eyebrow {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 11.5px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold-deep);
+    font-weight: 600; margin-bottom: 22px;
+  }
+  html.dark .eyebrow { color: var(--gold); }
+  .eyebrow::before { content: ''; width: 26px; height: 1px; background: currentColor; }
+  h1.hero-title { font-size: 46px; line-height: 1.08; margin: 0 0 20px; font-weight: 500; }
+  h1.hero-title em { font-style: normal; color: var(--gold-deep); }
+  html.dark h1.hero-title em { color: var(--gold); }
+  .hero-sub { font-size: 16.5px; line-height: 1.65; color: var(--text-soft); max-width: 52ch; margin: 0 0 28px; }
+  .hero-meta { display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 13px; color: var(--text-soft); border-top: 1px solid var(--border); padding-top: 20px; margin-top: 4px; }
+  .hero-meta span { display: flex; align-items: center; gap: 7px; }
+  .hero-meta strong { color: var(--text); font-weight: 600; }
+  .hero-meta .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--gold); flex: none; }
+
+  .facet-orn { width: 100%; height: auto; }
+
+  .disclaimer-strip {
+    background: var(--surface-card-2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+    font-size: 12.5px; color: var(--text-soft); padding: 10px 0;
+  }
+  .disclaimer-strip .wrap { display: flex; align-items: center; gap: 8px; }
+  .disclaimer-strip svg { width: 14px; height: 14px; flex: none; color: var(--gold-deep); }
+  html.dark .disclaimer-strip svg { color: var(--gold); }
+
+  /* ---------- Tabs ---------- */
+  .tab-nav {
+    position: sticky; top: 68px; z-index: 30;
+    background: color-mix(in oklch, var(--surface) 92%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+    overflow-x: auto;
+  }
+  .tab-nav .wrap { display: flex; gap: 4px; }
+  .tab-btn {
+    appearance: none; border: none; background: transparent; cursor: pointer;
+    font-family: var(--sans); font-size: 13.5px; font-weight: 600; color: var(--text-soft);
+    padding: 16px 16px 14px; white-space: nowrap; border-bottom: 2px solid transparent;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--gold-deep); border-bottom-color: var(--gold); }
+  html.dark .tab-btn.active { color: var(--gold); }
+
+  .view { padding: 44px 0 90px; }
+  .view:not(.active) { display: none; }
+
+  .view-head { margin-bottom: 30px; }
+  .view-head h2 { font-size: 28px; margin: 0 0 8px; }
+  .view-head p { color: var(--text-soft); font-size: 14.5px; max-width: 70ch; margin: 0; line-height: 1.6; }
+
+  /* ---------- KPI cards ---------- */
+  .kpi-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 14px; margin-bottom: 36px; }
+  .kpi-card {
+    background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius);
+    padding: 18px 18px 16px; box-shadow: var(--shadow);
+  }
+  .kpi-card .label { font-size: 11px; letter-spacing: 0.06em; text-transform: uppercase; color: var(--text-soft); font-weight: 600; margin-bottom: 10px; }
+  .kpi-card .value { font-family: var(--serif); font-size: 27px; font-weight: 500; line-height: 1; }
+  .kpi-card .value .unit { font-size: 15px; color: var(--text-soft); font-weight: 400; }
+  .kpi-card .foot { font-size: 12px; color: var(--text-soft); margin-top: 8px; }
+  .kpi-card .foot.pos { color: var(--c-sage); }
+
+  /* ---------- Panels / cards ---------- */
+  .panel {
+    background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); padding: 26px 28px; margin-bottom: 22px;
+  }
+  .panel-title { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; margin-bottom: 20px; flex-wrap: wrap; }
+  .panel-title h3 { font-size: 18px; margin: 0; }
+  .panel-title .hint { font-size: 12.5px; color: var(--text-soft); }
+  .grid-2 { display: grid; grid-template-columns: 1.3fr 1fr; gap: 22px; }
+  .callout {
+    border-left: 3px solid var(--gold); background: var(--surface-card-2);
+    padding: 16px 18px; border-radius: 0 var(--radius) var(--radius) 0; font-size: 13.5px; line-height: 1.6; color: var(--text-soft);
+  }
+  .callout strong { color: var(--text); }
+
+  /* ---------- Tables ---------- */
+  table { width: 100%; border-collapse: collapse; font-size: 13.5px; }
+  thead th {
+    text-align: left; font-size: 10.5px; letter-spacing: 0.07em; text-transform: uppercase;
+    color: var(--text-soft); font-weight: 600; padding: 0 12px 10px; border-bottom: 1px solid var(--border);
+  }
+  tbody td { padding: 11px 12px; border-bottom: 1px solid var(--border); }
+  tbody tr:last-child td { border-bottom: none; }
+  td.num, th.num { text-align: right; font-variant-numeric: tabular-nums; }
+  td.strong { font-weight: 600; }
+  .tier-chip { display: inline-flex; align-items: center; gap: 6px; font-weight: 600; font-size: 12.5px; }
+  .tier-chip .dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ---------- Charts ---------- */
+  .chart-box svg { width: 100%; height: auto; overflow: visible; font-family: var(--sans); }
+  .bar-label { font-size: 11.5px; fill: var(--text-soft); }
+  .bar-value { font-size: 12px; fill: var(--text); font-weight: 600; }
+  .axis-line { stroke: var(--border); stroke-width: 1; }
+  .grid-line { stroke: var(--border); stroke-width: 1; stroke-dasharray: 2 4; }
+
+  .legend { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 16px; font-size: 12px; color: var(--text-soft); }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+  .legend .sw { width: 10px; height: 10px; border-radius: 2px; }
+
+  .inline-bar-row { display: grid; grid-template-columns: 150px 1fr auto; align-items: center; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--border); font-size: 13px; }
+  .inline-bar-row:last-child { border-bottom: none; }
+  .inline-bar-row .name { font-weight: 600; }
+  .inline-bar-track { height: 8px; background: var(--surface-card-2); border-radius: 4px; overflow: hidden; }
+  .inline-bar-fill { height: 100%; border-radius: 4px; background: var(--gold); }
+  .inline-bar-row .val { font-variant-numeric: tabular-nums; color: var(--text-soft); white-space: nowrap; }
+
+  /* ---------- RFM cards ---------- */
+  .rfm-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; margin-bottom: 22px; }
+  .rfm-card { background: var(--surface-card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 20px 20px 18px; border-top: 3px solid var(--c-stone); }
+  .rfm-card .name { display: flex; align-items: center; gap: 8px; font-family: var(--serif); font-size: 17px; margin-bottom: 12px; }
+  .rfm-card .name .dot { width: 9px; height: 9px; border-radius: 50%; }
+  .rfm-card .metrics { display: flex; gap: 18px; margin-bottom: 12px; }
+  .rfm-card .metrics div { font-size: 20px; font-weight: 700; font-family: var(--serif); }
+  .rfm-card .metrics label { display: block; font-size: 10.5px; text-transform: uppercase; letter-spacing: 0.05em; color: var(--text-soft); font-weight: 600; margin-top: 3px; }
+  .rfm-card .action { font-size: 12.5px; color: var(--text-soft); line-height: 1.55; border-top: 1px solid var(--border); padding-top: 10px; }
+  .rfm-card .action strong { color: var(--text); }
+
+  /* ---------- Footer ---------- */
+  footer { border-top: 1px solid var(--border); padding: 46px 0 60px; margin-top: 20px; }
+  footer .wrap { display: grid; grid-template-columns: 1.3fr 1fr 1fr; gap: 36px; }
+  footer h4 { font-family: var(--serif); font-size: 15px; margin: 0 0 12px; }
+  footer p, footer li { font-size: 13px; color: var(--text-soft); line-height: 1.7; }
+  footer ul { list-style: none; padding: 0; margin: 0; }
+  footer a.file-link { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+  footer a.file-link:hover { border-color: var(--gold); }
+  .foot-bottom { max-width: 1180px; margin: 40px auto 0; padding: 20px 32px 0; border-top: 1px solid var(--border); font-size: 12px; color: var(--text-soft); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+
+  @media (max-width: 980px) {
+    .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    .grid-2 { grid-template-columns: 1fr; }
+    .hero .wrap { grid-template-columns: 1fr; }
+    .facet-orn { max-width: 260px; margin: 0 auto; }
+    .rfm-grid { grid-template-columns: 1fr; }
+    footer .wrap { grid-template-columns: 1fr; }
+    h1.hero-title { font-size: 34px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="topbar">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="mark" viewBox="0 0 26 26" fill="none">
+        <path d="M13 1 L23 13 L13 25 L3 13 Z" stroke="var(--gold)" stroke-width="1.4"/>
+        <path d="M13 1 L13 25 M3 13 L23 13" stroke="var(--gold)" stroke-width="0.7" opacity="0.6"/>
+      </svg>
+      <span class="word">Client Insight &amp; Data<small>Portfolio Data Analyst — données simulées</small></span>
+    </div>
+    <button class="theme-toggle" id="themeToggle" aria-label="Changer de thème">
+      <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M21 12.8A9 9 0 1 1 11.2 3 7 7 0 0 0 21 12.8Z"/></svg>
+      <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.5v2.4M12 19.1v2.4M4.6 4.6l1.7 1.7M17.7 17.7l1.7 1.7M2.5 12h2.4M19.1 12h2.4M4.6 19.4l1.7-1.7M17.7 6.3l1.7-1.7"/></svg>
+    </button>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="wrap">
+    <div>
+      <div class="eyebrow">Département Client Insight &amp; Data</div>
+      <h1 class="hero-title">Comprendre la valeur<br>et le parcours du <em>client</em>, marché après marché.</h1>
+      <p class="hero-sub">Portfolio technique construit pour le poste de Data Analyst — Client Insight &amp; Data : génération de données, requêtes SQL, analyse Python, et dashboard de restitution harmonisant CLV, rétention, parcours omnicanal et segmentation client entre le siège et les marchés.</p>
+      <div class="hero-meta">
+        <span><i class="dot"></i>4 000 clients simulés — 5 marchés</span>
+        <span><i class="dot"></i>SQL (BigQuery) · Python (pandas) · Dashboard HTML</span>
+        <span><i class="dot"></i>CLV · Rétention · Omnicanal · RFM</span>
+      </div>
+    </div>
+    <svg class="facet-orn" viewBox="0 0 320 320" fill="none">
+      <g opacity="0.9">
+        <path d="M160 20 L260 100 L220 260 L100 260 L60 100 Z" stroke="var(--gold)" stroke-width="1.2"/>
+        <path d="M160 20 L160 260 M60 100 L260 100 M100 260 L160 20 M220 260 L160 20 M60 100 L220 260 M260 100 L100 260" stroke="var(--gold)" stroke-width="0.7" opacity="0.55"/>
+        <circle cx="160" cy="140" r="118" stroke="var(--c-stone)" stroke-width="0.6" opacity="0.4"/>
+      </g>
+    </svg>
+  </div>
+</section>
+
+<div class="disclaimer-strip">
+  <div class="wrap">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M12 9v4M12 16.5h.01M10.3 3.9 2.6 17.5A1.8 1.8 0 0 0 4.2 20h15.6a1.8 1.8 0 0 0 1.6-2.6L13.7 3.9a1.8 1.8 0 0 0-3.4 0Z"/></svg>
+    <span>Toutes les données de ce projet sont <strong style="color:var(--text)">100% simulées</strong> (génération synthétique) — aucune donnée réelle d'une maison de joaillerie. Voir la méthodologie de génération dans le code source.</span>
+  </div>
+</div>
+
+<nav class="tab-nav">
+  <div class="wrap">
+    <button class="tab-btn active" data-view="overview">Vue d'ensemble</button>
+    <button class="tab-btn" data-view="clv">Valeur client (CLV)</button>
+    <button class="tab-btn" data-view="retention">Rétention &amp; fidélisation</button>
+    <button class="tab-btn" data-view="omni">Parcours omnicanal</button>
+    <button class="tab-btn" data-view="rfm">Segmentation RFM</button>
+  </div>
+</nav>
+
+<main class="wrap">
+
+  <!-- ============================= VUE D'ENSEMBLE ============================= -->
+  <section id="view-overview" class="view active">
+    <div class="view-head">
+      <h2>Vue d'ensemble</h2>
+      <p>Photographie consolidée de la base clients sur 24 mois glissants, avec une vue comparative harmonisée entre le siège et les quatre marchés — même définition, même devise de référence (EUR), même fenêtre d'observation pour tous.</p>
+    </div>
+
+    <div class="kpi-grid" id="kpiOverview"></div>
+
+    <div class="panel">
+      <div class="panel-title">
+        <h3>Harmonisation siège / marchés</h3>
+        <span class="hint">Indicateurs calculés avec une définition strictement identique sur les 5 marchés</span>
+      </div>
+      <div id="tableHarmonisation"></div>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-title"><h3>Répartition des clients par marché</h3></div>
+        <div id="chartMarketSplit" class="chart-box"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><h3>Approche méthodologique</h3></div>
+        <div class="callout">
+          <strong>Trois règles d'harmonisation</strong> appliquées à toutes les données de ce projet : (1) chaque transaction est convertie en EUR à un taux documenté, en plus du montant en devise locale ; (2) tous les indicateurs de cycle de vie sont calculés sur la même fenêtre de 24 mois pour tous les marchés ; (3) « client actif », « omnicanal » et les seuils de tier utilisent une définition unique, jamais adaptée marché par marché. Détail complet dans <code>kpi-documentation/documentation_kpis.md</code>.
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================= CLV ============================= -->
+  <section id="view-clv" class="view">
+    <div class="view-head">
+      <h2>Valeur client — CLV</h2>
+      <p>La Customer Lifetime Value cumule la dépense d'un client depuis sa première visite. Elle est restituée par tier CRM (moyenne pondérée tous marchés) et détaillée marché par marché, avec la médiane pour ne pas laisser les très gros paniers Haute Joaillerie déformer la lecture du client « typique ».</p>
+    </div>
+
+    <div class="kpi-grid" id="kpiClv" style="grid-template-columns:repeat(4,1fr);"></div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-title">
+          <h3>CLV moyenne par tier CRM</h3>
+          <span class="hint">Moyenne pondérée, tous marchés</span>
+        </div>
+        <div id="chartClvTier" class="chart-box"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title">
+          <h3>Panier moyen par catégorie</h3>
+          <span class="hint">Échelle proportionnelle au montant</span>
+        </div>
+        <div id="chartAov"></div>
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">
+        <h3>Détail CLV par marché et par tier</h3>
+        <span class="hint">Moyenne / médiane en EUR</span>
+      </div>
+      <div id="tableClvDetail"></div>
+    </div>
+  </section>
+
+  <!-- ============================= RETENTION ============================= -->
+  <section id="view-retention" class="view">
+    <div class="view-head">
+      <h2>Rétention &amp; fidélisation</h2>
+      <p>Analyse par cohorte d'acquisition : part des clients encore actifs N mois après leur premier achat. Dans la haute joaillerie, le cycle d'achat suit des occasions (anniversaires, fêtes, cadeaux) plutôt qu'un rythme mensuel régulier — une courbe irrégulière, avec des pics autour de 5-6 mois et 11-12 mois, est cohérente avec ce comportement.</p>
+    </div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-title">
+          <h3>Courbe de rétention par cohorte</h3>
+          <span class="hint">% de clients actifs, agrégé toutes cohortes — mois 1 à 12</span>
+        </div>
+        <div id="chartRetention" class="chart-box"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><h3>Pyramide des tiers CRM</h3></div>
+        <div id="chartTierPyramid" class="chart-box"></div>
+      </div>
+    </div>
+
+    <div class="callout" style="margin-bottom:22px;">
+      <strong>Lecture :</strong> la rétention à 12 mois s'établit à <strong id="ret12mText">—</strong> en moyenne sur l'ensemble des cohortes observées. Un tel profil de rétention par occasions suggère de caler les campagnes de réactivation sur des jalons calendaires personnalisés (anniversaire de la relation, date d'achat précédente, fêtes locales par marché) plutôt que sur un cycle mensuel fixe.
+    </div>
+  </section>
+
+  <!-- ============================= OMNICANAL ============================= -->
+  <section id="view-omni" class="view">
+    <div class="view-head">
+      <h2>Parcours omnicanal</h2>
+      <p>Comparaison des clients ayant utilisé un seul canal d'achat (boutique, en ligne ou événement privé) contre ceux ayant combiné plusieurs canaux, marché par marché — et répartition des points de contact CRM par type d'interaction.</p>
+    </div>
+
+    <div class="kpi-grid" id="kpiOmni" style="grid-template-columns:repeat(3,1fr);"></div>
+
+    <div class="grid-2">
+      <div class="panel">
+        <div class="panel-title">
+          <h3>CLV moyenne — mono-canal vs omnicanal</h3>
+          <span class="hint">Par marché, en EUR</span>
+        </div>
+        <div id="chartOmniCompare" class="chart-box"></div>
+      </div>
+      <div class="panel">
+        <div class="panel-title"><h3>Répartition des points de contact CRM</h3></div>
+        <div id="chartTouchpoints"></div>
+      </div>
+    </div>
+
+    <div class="callout">
+      <strong>Constat central :</strong> sur les 5 marchés, les clients omnicanaux affichent une CLV moyenne <strong>environ deux fois supérieure</strong> aux clients mono-canal, de façon homogène. Cet écart soutient un investissement dans la continuité du parcours (boutique ↔ digital ↔ événementiel) plutôt qu'un arbitrage entre canaux.
+    </div>
+  </section>
+
+  <!-- ============================= RFM ============================= -->
+  <section id="view-rfm" class="view">
+    <div class="view-head">
+      <h2>Segmentation RFM</h2>
+      <p>Récence / Fréquence / Montant — une segmentation comportementale complémentaire au tier CRM. Le tier reflète la valeur cumulée historique ; le RFM reflète le comportement récent, et permet de détecter un client à forte valeur historique qui décroche (segment « À risque ») avant que le tier seul ne le révèle.</p>
+    </div>
+
+    <div class="rfm-grid" id="rfmCards"></div>
+
+    <div class="panel">
+      <div class="panel-title">
+        <h3>Répartition des clients par segment</h3>
+        <span class="hint">Nombre de clients</span>
+      </div>
+      <div id="chartRfmBars" class="chart-box"></div>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <div>
+      <h4>À propos de ce portfolio</h4>
+      <p>Projet construit pour illustrer une candidature au poste de Data Analyst au sein du département Client Insight &amp; Data. Il couvre l'ensemble de la chaîne : génération de données synthétiques, requêtes SQL (dialecte BigQuery), analyse Python (pandas), et restitution dans ce dashboard — sans utiliser ni reproduire de données, logo ou visuel d'une maison de joaillerie existante.</p>
+    </div>
+    <div>
+      <h4>Code source</h4>
+      <ul>
+        <li><span class="file-link">data/generate_synthetic_data.py</span></li>
+        <li><span class="file-link">sql/01…06_*.sql</span></li>
+        <li><span class="file-link">analysis/build_dashboard_data.py</span></li>
+        <li><span class="file-link">kpi-documentation/documentation_kpis.md</span></li>
+      </ul>
+    </div>
+    <div>
+      <h4>Thématiques couvertes</h4>
+      <ul>
+        <li>Valeur client &amp; CLV</li>
+        <li>Rétention &amp; analyse de cohortes</li>
+        <li>Parcours omnicanal</li>
+        <li>Harmonisation siège / marchés</li>
+        <li>Segmentation RFM</li>
+      </ul>
+    </div>
+  </div>
+</footer>
+<div class="foot-bottom">
+  <span>Portfolio Data Analyst — Client Insight &amp; Data · données 100% simulées</span>
+  <span id="generatedAt"></span>
+</div>
+
+<script>
+/* =============================================================
+   DONNÉES (export de analysis/build_dashboard_data.py)
+   ============================================================= */
+const DATA = {
+  "generated_at": "2026-08-14T09:36:49Z",
+  "overview": { "nb_clients": 4000, "nb_transactions": 7596, "nb_marches": 5, "clv_moyenne_eur": 37330.0, "part_omnicanal_pct": 37.8, "taux_actifs_6m_pct": 71.4, "part_vic_pct": 17.4, "montant_total_eur": 149321513.0, "taux_retention_12m_pct": 18.8 },
+  "clv_par_marche_tier": [
+    {"market":"France (siège)","tier":"Découverte","nb_clients":470,"clv_moyenne_eur":6311.0,"clv_mediane_eur":2231.0,"transactions_moyennes":1.2},
+    {"market":"France (siège)","tier":"Client fidèle","nb_clients":312,"clv_moyenne_eur":34901.0,"clv_mediane_eur":32696.0,"transactions_moyennes":2.4},
+    {"market":"France (siège)","tier":"VIC","nb_clients":148,"clv_moyenne_eur":118914.0,"clv_mediane_eur":113926.0,"transactions_moyennes":2.8},
+    {"market":"France (siège)","tier":"Very VIP","nb_clients":10,"clv_moyenne_eur":276917.0,"clv_mediane_eur":272286.0,"transactions_moyennes":3.4},
+    {"market":"USA","tier":"Découverte","nb_clients":438,"clv_moyenne_eur":6006.0,"clv_mediane_eur":1770.0,"transactions_moyennes":1.2},
+    {"market":"USA","tier":"Client fidèle","nb_clients":329,"clv_moyenne_eur":34571.0,"clv_mediane_eur":32272.0,"transactions_moyennes":2.4},
+    {"market":"USA","tier":"VIC","nb_clients":158,"clv_moyenne_eur":116291.0,"clv_mediane_eur":112236.0,"transactions_moyennes":2.7},
+    {"market":"USA","tier":"Very VIP","nb_clients":9,"clv_moyenne_eur":249370.0,"clv_mediane_eur":246860.0,"transactions_moyennes":3.4},
+    {"market":"Japon","tier":"Découverte","nb_clients":305,"clv_moyenne_eur":6364.0,"clv_mediane_eur":2771.0,"transactions_moyennes":1.2},
+    {"market":"Japon","tier":"Client fidèle","nb_clients":216,"clv_moyenne_eur":34771.0,"clv_mediane_eur":31746.0,"transactions_moyennes":2.4},
+    {"market":"Japon","tier":"VIC","nb_clients":90,"clv_moyenne_eur":111522.0,"clv_mediane_eur":107823.0,"transactions_moyennes":3.0},
+    {"market":"Japon","tier":"Very VIP","nb_clients":7,"clv_moyenne_eur":272844.0,"clv_mediane_eur":264235.0,"transactions_moyennes":3.6},
+    {"market":"Chine","tier":"Découverte","nb_clients":404,"clv_moyenne_eur":5963.0,"clv_mediane_eur":1532.0,"transactions_moyennes":1.1},
+    {"market":"Chine","tier":"Client fidèle","nb_clients":333,"clv_moyenne_eur":34964.0,"clv_mediane_eur":32590.0,"transactions_moyennes":2.5},
+    {"market":"Chine","tier":"VIC","nb_clients":149,"clv_moyenne_eur":114885.0,"clv_mediane_eur":107993.0,"transactions_moyennes":2.7},
+    {"market":"Chine","tier":"Very VIP","nb_clients":18,"clv_moyenne_eur":274025.0,"clv_mediane_eur":256891.0,"transactions_moyennes":3.7},
+    {"market":"Moyen-Orient","tier":"Découverte","nb_clients":277,"clv_moyenne_eur":5266.0,"clv_mediane_eur":1143.0,"transactions_moyennes":1.2},
+    {"market":"Moyen-Orient","tier":"Client fidèle","nb_clients":220,"clv_moyenne_eur":34233.0,"clv_mediane_eur":31549.0,"transactions_moyennes":2.3},
+    {"market":"Moyen-Orient","tier":"VIC","nb_clients":97,"clv_moyenne_eur":112179.0,"clv_mediane_eur":101576.0,"transactions_moyennes":2.7},
+    {"market":"Moyen-Orient","tier":"Very VIP","nb_clients":10,"clv_moyenne_eur":310264.0,"clv_mediane_eur":315229.0,"transactions_moyennes":4.2}
+  ],
+  "harmonisation_marches": [
+    {"market":"Chine","nb_clients":904,"clv_moyenne_eur":39936.0,"part_vic_pct":18.5,"part_omnicanal_pct":39.0,"taux_actifs_pct":71.5,"part_acquisition_digitale_pct":18.3,"transactions_moyennes":1.94},
+    {"market":"Moyen-Orient","nb_clients":604,"clv_moyenne_eur":38037.0,"part_vic_pct":17.7,"part_omnicanal_pct":33.6,"taux_actifs_pct":72.0,"part_acquisition_digitale_pct":18.9,"transactions_moyennes":1.87},
+    {"market":"USA","nb_clients":934,"clv_moyenne_eur":37069.0,"part_vic_pct":17.9,"part_omnicanal_pct":38.9,"taux_actifs_pct":70.9,"part_acquisition_digitale_pct":20.6,"transactions_moyennes":1.89},
+    {"market":"France (siège)","nb_clients":940,"clv_moyenne_eur":36408.0,"part_vic_pct":16.8,"part_omnicanal_pct":37.2,"taux_actifs_pct":71.2,"part_acquisition_digitale_pct":19.3,"transactions_moyennes":1.87},
+    {"market":"Japon","nb_clients":618,"clv_moyenne_eur":34625.0,"part_vic_pct":15.7,"part_omnicanal_pct":39.3,"taux_actifs_pct":72.0,"part_acquisition_digitale_pct":19.7,"transactions_moyennes":1.94}
+  ],
+  "mix_omnicanal": [
+    {"market":"France (siège)","segment":"Mono-canal","nb_clients":504,"clv_moyenne_eur":27225.0},
+    {"market":"France (siège)","segment":"Omnicanal","nb_clients":350,"clv_moyenne_eur":58578.0},
+    {"market":"USA","segment":"Mono-canal","nb_clients":485,"clv_moyenne_eur":30483.0},
+    {"market":"USA","segment":"Omnicanal","nb_clients":363,"clv_moyenne_eur":54652.0},
+    {"market":"Japon","segment":"Mono-canal","nb_clients":314,"clv_moyenne_eur":25478.0},
+    {"market":"Japon","segment":"Omnicanal","nb_clients":243,"clv_moyenne_eur":55137.0},
+    {"market":"Chine","segment":"Mono-canal","nb_clients":461,"clv_moyenne_eur":30715.0},
+    {"market":"Chine","segment":"Omnicanal","nb_clients":353,"clv_moyenne_eur":62161.0},
+    {"market":"Moyen-Orient","segment":"Mono-canal","nb_clients":340,"clv_moyenne_eur":27839.0},
+    {"market":"Moyen-Orient","segment":"Omnicanal","nb_clients":203,"clv_moyenne_eur":66546.0}
+  ],
+  "aov_frequence": [
+    {"category":"Haute Joaillerie","nb_clients_acheteurs":522,"panier_moyen_eur":113856.0,"frequence_moyenne":1.06},
+    {"category":"Horlogerie","nb_clients_acheteurs":1018,"panier_moyen_eur":29842.0,"frequence_moyenne":1.13},
+    {"category":"Joaillerie","nb_clients_acheteurs":1722,"panier_moyen_eur":16392.0,"frequence_moyenne":1.31},
+    {"category":"Mariage","nb_clients_acheteurs":935,"panier_moyen_eur":12080.0,"frequence_moyenne":1.1},
+    {"category":"Accessoires & Parfums","nb_clients_acheteurs":1964,"panier_moyen_eur":863.0,"frequence_moyenne":1.32}
+  ],
+  "cohortes_retention": [
+    {"month_number":1,"retention_pct":0.5},{"month_number":2,"retention_pct":0.7},{"month_number":3,"retention_pct":4.3},
+    {"month_number":4,"retention_pct":17.6},{"month_number":5,"retention_pct":41.1},{"month_number":6,"retention_pct":31.5},
+    {"month_number":7,"retention_pct":8.7},{"month_number":8,"retention_pct":7.0},{"month_number":9,"retention_pct":13.6},
+    {"month_number":10,"retention_pct":23.9},{"month_number":11,"retention_pct":25.0},{"month_number":12,"retention_pct":18.8}
+  ],
+  "rfm_segments": [
+    {"segment":"Champions","nb_clients":482,"montant_moyen_eur":88136.0,"recence_moyenne_jours":31.0,"frequence_moyenne":3.51},
+    {"segment":"Clients fidèles","nb_clients":951,"montant_moyen_eur":43820.0,"recence_moyenne_jours":57.0,"frequence_moyenne":2.64},
+    {"segment":"Prometteurs","nb_clients":485,"montant_moyen_eur":19696.0,"recence_moyenne_jours":35.0,"frequence_moyenne":1.07},
+    {"segment":"Standard","nb_clients":434,"montant_moyen_eur":17388.0,"recence_moyenne_jours":116.0,"frequence_moyenne":1.55},
+    {"segment":"À risque","nb_clients":563,"montant_moyen_eur":60318.0,"recence_moyenne_jours":155.0,"frequence_moyenne":2.61},
+    {"segment":"Perdus","nb_clients":701,"montant_moyen_eur":20127.0,"recence_moyenne_jours":218.0,"frequence_moyenne":1.04}
+  ],
+  "touchpoints_summary": [
+    {"type":"Appel conseiller de vente","nb":3147,"part_pct":20.6},
+    {"type":"Événement VIC","nb":3107,"part_pct":20.3},
+    {"type":"Ouverture newsletter","nb":3050,"part_pct":20.0},
+    {"type":"Visite site e-commerce","nb":3007,"part_pct":19.7},
+    {"type":"Rendez-vous boutique","nb":2977,"part_pct":19.5}
+  ]
+};
+
+const TIER_ORDER = ["Découverte", "Client fidèle", "VIC", "Very VIP"];
+const TIER_COLOR = { "Découverte": "var(--tier-1)", "Client fidèle": "var(--tier-2)", "VIC": "var(--tier-3)", "Very VIP": "var(--tier-4)" };
+const SEGMENT_COLOR = { "Champions": "var(--gold)", "Clients fidèles": "var(--c-sage)", "Prometteurs": "var(--tier-2)", "Standard": "var(--c-stone)", "À risque": "var(--c-amber)", "Perdus": "var(--c-garnet)" };
+const SEGMENT_ACTION = {
+  "Champions": "Programme VIC prioritaire, invitations en avant-première aux événements privés.",
+  "Clients fidèles": "Entretenir la relation via le conseiller référent, avant-premières collections.",
+  "Prometteurs": "Faciliter un deuxième achat rapproché pour installer la relation.",
+  "Standard": "Suivi standard, sans action de réactivation prioritaire.",
+  "À risque": "Ré-engagement prioritaire : contact personnalisé du conseiller de vente référent.",
+  "Perdus": "Campagne de réactivation à faible coût, ou désinvestissement raisonné."
+};
+
+const fmtInt = n => new Intl.NumberFormat('fr-FR').format(Math.round(n));
+const fmtEur = n => new Intl.NumberFormat('fr-FR', { maximumFractionDigits: 0 }).format(n) + ' €';
+const fmtEurK = n => n >= 1000 ? (n/1000).toFixed(n >= 10000 ? 0 : 1).replace('.0','') + ' k€' : Math.round(n) + ' €';
+const fmtPct = (n, d=1) => new Intl.NumberFormat('fr-FR', { minimumFractionDigits: d, maximumFractionDigits: d }).format(n) + ' %';
+
+/* ---------------- KPI card helper ---------------- */
+function kpiCard(label, value, foot, footClass) {
+  return `<div class="kpi-card"><div class="label">${label}</div><div class="value">${value}</div>${foot ? `<div class="foot ${footClass||''}">${foot}</div>` : ''}</div>`;
+}
+
+/* ---------------- Chart helpers (hand-coded SVG) ---------------- */
+function hBarChart(rows, opts) {
+  // rows: [{label, value, color}]
+  const W = 560, PAD_L = 130, PAD_R = 60, ROW_H = 34, GAP = 10;
+  const H = rows.length * (ROW_H + GAP) - GAP;
+  const max = Math.max(...rows.map(r => r.value)) * 1.08;
+  const barMaxW = W - PAD_L - PAD_R;
+  let bars = '';
+  rows.forEach((r, i) => {
+    const y = i * (ROW_H + GAP);
+    const w = Math.max(2, (r.value / max) * barMaxW);
+    bars += `
+      <text x="${PAD_L - 12}" y="${y + ROW_H/2 + 4}" text-anchor="end" class="bar-label">${r.label}</text>
+      <rect x="${PAD_L}" y="${y + 4}" width="${barMaxW}" height="${ROW_H - 8}" rx="3" fill="var(--surface-card-2)"></rect>
+      <rect x="${PAD_L}" y="${y + 4}" width="${w}" height="${ROW_H - 8}" rx="3" fill="${r.color}"></rect>
+      <text x="${PAD_L + w + 10}" y="${y + ROW_H/2 + 4}" class="bar-value">${opts.fmt(r.value)}</text>
+    `;
+  });
+  return `<svg viewBox="0 0 ${W} ${H}">${bars}</svg>`;
+}
+
+function groupedBarChart(groups, series, opts) {
+  // groups: [label], series: [{name, color, values:[...]}]
+  const W = 560, PAD_L = 44, PAD_R = 10, PAD_T = 10, PAD_B = 30;
+  const H = 260;
+  const plotW = W - PAD_L - PAD_R, plotH = H - PAD_T - PAD_B;
+  const max = Math.max(...series.flatMap(s => s.values)) * 1.12;
+  const groupW = plotW / groups.length;
+  const barW = Math.min(26, (groupW - 16) / series.length);
+  let gridLines = '', bars = '', labels = '';
+  const steps = 4;
+  for (let i = 0; i <= steps; i++) {
+    const y = PAD_T + plotH - (i / steps) * plotH;
+    gridLines += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" class="grid-line"></line>
+      <text x="${PAD_L - 8}" y="${y+4}" text-anchor="end" class="bar-label">${opts.axisFmt((i/steps)*max)}</text>`;
+  }
+  groups.forEach((g, gi) => {
+    const gx = PAD_L + gi * groupW + (groupW - barW * series.length) / 2;
+    series.forEach((s, si) => {
+      const v = s.values[gi];
+      const h = (v / max) * plotH;
+      const x = gx + si * barW;
+      const y = PAD_T + plotH - h;
+      bars += `<rect x="${x}" y="${y}" width="${barW-3}" height="${h}" rx="2" fill="${s.color}"></rect>`;
+    });
+    labels += `<text x="${PAD_L + gi * groupW + groupW/2}" y="${H - 8}" text-anchor="middle" class="bar-label">${g}</text>`;
+  });
+  return `<svg viewBox="0 0 ${W} ${H}">${gridLines}${bars}${labels}</svg>`;
+}
+
+function lineAreaChart(points, opts) {
+  const W = 560, H = 260, PAD_L = 44, PAD_R = 16, PAD_T = 16, PAD_B = 30;
+  const plotW = W - PAD_L - PAD_R, plotH = H - PAD_T - PAD_B;
+  const xs = points.map(p => p.x), ys = points.map(p => p.y);
+  const xMin = Math.min(...xs), xMax = Math.max(...xs);
+  const yMax = Math.max(...ys) * 1.15;
+  const X = x => PAD_L + ((x - xMin) / (xMax - xMin)) * plotW;
+  const Y = y => PAD_T + plotH - (y / yMax) * plotH;
+  const steps = 4;
+  let gridLines = '';
+  for (let i = 0; i <= steps; i++) {
+    const y = PAD_T + plotH - (i/steps) * plotH;
+    gridLines += `<line x1="${PAD_L}" y1="${y}" x2="${W-PAD_R}" y2="${y}" class="grid-line"></line>
+      <text x="${PAD_L-8}" y="${y+4}" text-anchor="end" class="bar-label">${Math.round((i/steps)*yMax)}%</text>`;
+  }
+  const linePath = points.map((p,i) => `${i===0?'M':'L'}${X(p.x)},${Y(p.y)}`).join(' ');
+  const areaPath = linePath + ` L${X(xMax)},${Y(0)} L${X(xMin)},${Y(0)} Z`;
+  let dots = '', labels = '';
+  points.forEach(p => {
+    dots += `<circle cx="${X(p.x)}" cy="${Y(p.y)}" r="3" fill="var(--gold)"></circle>`;
+    labels += `<text x="${X(p.x)}" y="${H-8}" text-anchor="middle" class="bar-label">${p.x}</text>`;
+  });
+  return `<svg viewBox="0 0 ${W} ${H}">
+    ${gridLines}
+    <path d="${areaPath}" fill="var(--gold)" opacity="0.12"></path>
+    <path d="${linePath}" fill="none" stroke="var(--gold)" stroke-width="2"></path>
+    ${dots}${labels}
+    <text x="${(PAD_L+W-PAD_R)/2}" y="${H+2}" text-anchor="middle" class="bar-label" opacity="0"></text>
+  </svg>`;
+}
+
+function stackedBar(rows) {
+  // rows: [{label, value, pct, color}]
+  let segs = '', x = 0;
+  rows.forEach(r => {
+    segs += `<div title="${r.label} — ${fmtPct(r.pct)}" style="width:${r.pct}%; background:${r.color}; height:100%; display:inline-block;"></div>`;
+  });
+  const legend = rows.map(r => `<span><i class="sw" style="background:${r.color}"></i>${r.label} — ${fmtPct(r.pct)}</span>`).join('');
+  return `<div style="height:26px; border-radius:5px; overflow:hidden; display:flex; border:1px solid var(--border);">${segs}</div><div class="legend">${legend}</div>`;
+}
+
+/* =============================================================
+   RENDER — Vue d'ensemble
+   ============================================================= */
+function renderOverview() {
+  const o = DATA.overview;
+  document.getElementById('kpiOverview').innerHTML = [
+    kpiCard('Clients actifs (base)', fmtInt(o.nb_clients), `${fmtInt(o.nb_transactions)} transactions sur 24 mois`),
+    kpiCard('CLV moyenne', fmtEur(o.clv_moyenne_eur), `${fmtInt(o.montant_total_eur)} € de CA cumulé simulé`),
+    kpiCard('Part omnicanale', fmtPct(o.part_omnicanal_pct), 'Clients multi-canal', 'pos'),
+    kpiCard('Actifs à 6 mois', fmtPct(o.taux_actifs_6m_pct), 'Sur l\'ensemble de la base'),
+    kpiCard('Rétention à 12 mois', fmtPct(o.taux_retention_12m_pct), 'Moyenne toutes cohortes'),
+  ].join('');
+
+  const rows = DATA.harmonisation_marches;
+  document.getElementById('tableHarmonisation').innerHTML = `
+    <table>
+      <thead><tr>
+        <th>Marché</th><th class="num">Clients</th><th class="num">CLV moyenne</th>
+        <th class="num">% VIC+</th><th class="num">% Omnicanal</th><th class="num">% Actifs 6m</th><th class="num">% Acq. digitale</th>
+      </tr></thead>
+      <tbody>${rows.map(r => `
+        <tr>
+          <td class="strong">${r.market}</td>
+          <td class="num">${fmtInt(r.nb_clients)}</td>
+          <td class="num strong">${fmtEur(r.clv_moyenne_eur)}</td>
+          <td class="num">${fmtPct(r.part_vic_pct)}</td>
+          <td class="num">${fmtPct(r.part_omnicanal_pct)}</td>
+          <td class="num">${fmtPct(r.taux_actifs_pct)}</td>
+          <td class="num">${fmtPct(r.part_acquisition_digitale_pct)}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+
+  const marketRows = [...rows].sort((a,b) => b.nb_clients - a.nb_clients)
+    .map(r => ({ label: r.market, value: r.nb_clients, color: 'var(--gold)' }));
+  document.getElementById('chartMarketSplit').innerHTML = hBarChart(marketRows, { fmt: v => fmtInt(v) });
+}
+
+/* =============================================================
+   RENDER — CLV
+   ============================================================= */
+function renderClv() {
+  const rows = DATA.clv_par_marche_tier;
+  const o = DATA.overview;
+
+  const byTier = {};
+  rows.forEach(r => {
+    if (!byTier[r.tier]) byTier[r.tier] = { nb: 0, spend: 0 };
+    byTier[r.tier].nb += r.nb_clients;
+    byTier[r.tier].spend += r.nb_clients * r.clv_moyenne_eur;
+  });
+  const veryVip = byTier["Very VIP"];
+  const decouverte = byTier["Découverte"];
+
+  document.getElementById('kpiClv').innerHTML = [
+    kpiCard('CLV moyenne globale', fmtEur(o.clv_moyenne_eur)),
+    kpiCard('CLV moyenne — Very VIP', fmtEur(veryVip.spend/veryVip.nb), `${fmtInt(veryVip.nb)} clients (${fmtPct(veryVip.nb/o.nb_clients*100)})`),
+    kpiCard('CLV moyenne — Découverte', fmtEur(decouverte.spend/decouverte.nb), `${fmtInt(decouverte.nb)} clients (${fmtPct(decouverte.nb/o.nb_clients*100)})`),
+    kpiCard('Écart Very VIP / Découverte', `×${Math.round((veryVip.spend/veryVip.nb)/(decouverte.spend/decouverte.nb))}`, 'Multiple de valeur'),
+  ].join('');
+
+  const tierRows = TIER_ORDER.map(t => ({ label: t, value: byTier[t].spend / byTier[t].nb, color: TIER_COLOR[t] }));
+  document.getElementById('chartClvTier').innerHTML = hBarChart(tierRows, { fmt: fmtEurK });
+
+  const maxAov = Math.max(...DATA.aov_frequence.map(r => r.panier_moyen_eur));
+  document.getElementById('chartAov').innerHTML = DATA.aov_frequence
+    .slice().sort((a,b) => b.panier_moyen_eur - a.panier_moyen_eur)
+    .map(r => `
+      <div class="inline-bar-row">
+        <div class="name">${r.category}</div>
+        <div class="inline-bar-track"><div class="inline-bar-fill" style="width:${Math.max(2, Math.sqrt(r.panier_moyen_eur/maxAov)*100)}%"></div></div>
+        <div class="val">${fmtEur(r.panier_moyen_eur)}</div>
+      </div>`).join('');
+
+  document.getElementById('tableClvDetail').innerHTML = `
+    <table>
+      <thead><tr><th>Marché</th><th>Tier</th><th class="num">Clients</th><th class="num">CLV moyenne</th><th class="num">CLV médiane</th><th class="num">Transactions moy.</th></tr></thead>
+      <tbody>${rows.map(r => `
+        <tr>
+          <td>${r.market}</td>
+          <td><span class="tier-chip"><i class="dot" style="background:${TIER_COLOR[r.tier]}"></i>${r.tier}</span></td>
+          <td class="num">${fmtInt(r.nb_clients)}</td>
+          <td class="num strong">${fmtEur(r.clv_moyenne_eur)}</td>
+          <td class="num">${fmtEur(r.clv_mediane_eur)}</td>
+          <td class="num">${r.transactions_moyennes}</td>
+        </tr>`).join('')}
+      </tbody>
+    </table>`;
+}
+
+/* =============================================================
+   RENDER — Rétention
+   ============================================================= */
+function renderRetention() {
+  document.getElementById('ret12mText').textContent = fmtPct(DATA.overview.taux_retention_12m_pct);
+  const points = DATA.cohortes_retention.map(r => ({ x: r.month_number, y: r.retention_pct }));
+  document.getElementById('chartRetention').innerHTML = lineAreaChart(points, {});
+
+  const byTier = {};
+  DATA.clv_par_marche_tier.forEach(r => { byTier[r.tier] = (byTier[r.tier]||0) + r.nb_clients; });
+  const pyramidRows = TIER_ORDER.map(t => ({ label: t, value: byTier[t], color: TIER_COLOR[t] }));
+  document.getElementById('chartTierPyramid').innerHTML = hBarChart(pyramidRows, { fmt: v => fmtInt(v) + ' clients' });
+}
+
+/* =============================================================
+   RENDER — Omnicanal
+   ============================================================= */
+function renderOmni() {
+  const rows = DATA.mix_omnicanal;
+  const mono = rows.filter(r => r.segment === 'Mono-canal');
+  const omni = rows.filter(r => r.segment === 'Omnicanal');
+  const avgMono = mono.reduce((s,r) => s + r.clv_moyenne_eur, 0) / mono.length;
+  const avgOmni = omni.reduce((s,r) => s + r.clv_moyenne_eur, 0) / omni.length;
+  const nbOmniClients = omni.reduce((s,r) => s + r.nb_clients, 0);
+
+  document.getElementById('kpiOmni').innerHTML = [
+    kpiCard('CLV moyenne — mono-canal', fmtEur(avgMono)),
+    kpiCard('CLV moyenne — omnicanal', fmtEur(avgOmni), `≈ ×${(avgOmni/avgMono).toFixed(1)} vs mono-canal`, 'pos'),
+    kpiCard('Clients omnicanaux', fmtInt(nbOmniClients), fmtPct(DATA.overview.part_omnicanal_pct) + ' de la base'),
+  ].join('');
+
+  const markets = [...new Set(rows.map(r => r.market))].sort((a,b) => {
+    const va = mono.find(r=>r.market===a).clv_moyenne_eur, vb = mono.find(r=>r.market===b).clv_moyenne_eur;
+    return vb - va;
+  });
+  const series = [
+    { name: 'Mono-canal', color: 'var(--c-stone)', values: markets.map(m => mono.find(r => r.market===m).clv_moyenne_eur) },
+    { name: 'Omnicanal', color: 'var(--gold)', values: markets.map(m => omni.find(r => r.market===m).clv_moyenne_eur) },
+  ];
+  document.getElementById('chartOmniCompare').innerHTML = groupedBarChart(markets, series, { axisFmt: fmtEurK })
+    + `<div class="legend">${series.map(s => `<span><i class="sw" style="background:${s.color}"></i>${s.name}</span>`).join('')}</div>`;
+
+  const total = DATA.touchpoints_summary.reduce((s,r) => s+r.nb, 0);
+  const colors = ['var(--gold)','var(--c-sage)','var(--tier-3)','var(--c-amber)','var(--c-stone)'];
+  const tpRows = DATA.touchpoints_summary.map((r,i) => ({ label: r.type, value: r.nb, pct: r.part_pct, color: colors[i % colors.length] }));
+  document.getElementById('chartTouchpoints').innerHTML = stackedBar(tpRows) +
+    `<div style="margin-top:18px;">` + tpRows.map(r => `
+      <div class="inline-bar-row">
+        <div class="name">${r.label}</div>
+        <div class="inline-bar-track"><div class="inline-bar-fill" style="width:${r.pct}%; background:${r.color}"></div></div>
+        <div class="val">${fmtInt(r.value)}</div>
+      </div>`).join('') + `</div>`;
+}
+
+/* =============================================================
+   RENDER — RFM
+   ============================================================= */
+function renderRfm() {
+  const rows = DATA.rfm_segments;
+  document.getElementById('rfmCards').innerHTML = rows.map(r => `
+    <div class="rfm-card" style="border-top-color:${SEGMENT_COLOR[r.segment]}">
+      <div class="name"><i class="dot" style="background:${SEGMENT_COLOR[r.segment]}"></i>${r.segment}</div>
+      <div class="metrics">
+        <div>${fmtInt(r.nb_clients)}<label>Clients</label></div>
+        <div>${fmtEurK(r.montant_moyen_eur)}<label>Montant moy.</label></div>
+        <div>${Math.round(r.recence_moyenne_jours)}j<label>Récence moy.</label></div>
+      </div>
+      <div class="action"><strong>Action :</strong> ${SEGMENT_ACTION[r.segment]}</div>
+    </div>`).join('');
+
+  const order = ["Champions","Clients fidèles","Prometteurs","Standard","À risque","Perdus"];
+  const barRows = order.map(s => rows.find(r => r.segment === s)).filter(Boolean)
+    .map(r => ({ label: r.segment, value: r.nb_clients, color: SEGMENT_COLOR[r.segment] }));
+  document.getElementById('chartRfmBars').innerHTML = hBarChart(barRows, { fmt: v => fmtInt(v) + ' clients' });
+}
+
+/* =============================================================
+   Tabs, thème, init
+   ============================================================= */
+function initTabs() {
+  const btns = document.querySelectorAll('.tab-btn');
+  btns.forEach(btn => btn.addEventListener('click', () => {
+    btns.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+    document.getElementById('view-' + btn.dataset.view).classList.add('active');
+    window.scrollTo({ top: document.querySelector('.tab-nav').offsetTop - 68, behavior: 'smooth' });
+  }));
+}
+
+function initTheme() {
+  const btn = document.getElementById('themeToggle');
+  btn.addEventListener('click', () => {
+    const isDark = document.documentElement.classList.toggle('dark');
+    localStorage.setItem('vca-theme', isDark ? 'dark' : 'light');
+  });
+}
+
+document.getElementById('generatedAt').textContent = 'Données générées le ' + new Date(DATA.generated_at).toLocaleDateString('fr-FR', { year: 'numeric', month: 'long', day: 'numeric' });
+
+renderOverview();
+renderClv();
+renderRetention();
+renderOmni();
+renderRfm();
+initTabs();
+initTheme();
+</script>
+</body>
+</html>
