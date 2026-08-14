@@ -111,6 +111,13 @@ cp dashboard/vca_client_insight_dashboard.html docs/index.html
   univers Ground Ops / OTP, palette marine et rouge) : ici palette ivoire /
   noir / or, typographie serif + sans-serif, ornement géométrique abstrait
   (aucun motif, logo ou photo d'une maison de joaillerie réelle).
+- **Calibration sur des sources de marché publiques réelles** : la
+  concentration de valeur client, le poids relatif des marchés et la part du
+  canal digital ont été comparés à des rapports publics (Richemont, Bain &
+  Company / Altagamma, Business of Fashion, Grand View Research) avant de
+  fixer les paramètres du générateur — voir
+  `kpi-documentation/documentation_kpis.md`, section 9 "Sources et
+  calibration marché", pour le détail sourcé et les limites assumées.
 
 ## Fichiers liés à cette candidature
 

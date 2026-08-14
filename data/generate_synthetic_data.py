@@ -132,6 +132,16 @@ def generate(n_customers: int, seed: int):
             mult = 1.0 + affinity * 1.8
             amount_eur = max(150, rng.normal(cat_mean * mult, cat_std * mult * 0.5))
 
+            # "pièce exceptionnelle" : les maisons de Haute Joaillerie vendent occasionnellement
+            # des pièces uniques/sur-mesure très au-dessus du prix moyen de collection. Ce mécanisme
+            # reproduit la concentration de valeur documentée dans le secteur du luxe (une minorité de
+            # clients / transactions portant une part disproportionnée du chiffre d'affaires -- voir
+            # kpi-documentation/documentation_kpis.md, section "Sources et calibration marché").
+            piece_exceptionnelle = False
+            if category == "Haute Joaillerie" and affinity > 0.30 and rng.random() < 0.12:
+                amount_eur *= rng.uniform(3.0, 9.0)
+                piece_exceptionnelle = True
+
             _, currency, fx_to_eur, _, season = market_info[market]
             # saisonnalité : pic de dépense selon le marché
             month = cursor.month
@@ -158,6 +168,7 @@ def generate(n_customers: int, seed: int):
                 "amount_local": round(amount_local, 2),
                 "currency": currency,
                 "amount_eur": round(amount_eur, 2),
+                "piece_exceptionnelle": piece_exceptionnelle,
             })
             total_spend_eur += amount_eur
             n_tx += 1

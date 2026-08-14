@@ -140,7 +140,31 @@ projet :
 
 ---
 
-## 9. Limites et hypothèses assumées
+## 9. Sources et calibration marché
+
+Les paramètres du générateur (`data/generate_synthetic_data.py`) ne sont pas
+choisis arbitrairement : chaque hypothèse structurante a été comparée à des
+données de marché publiques (études sectorielles, rapports annuels de groupes
+de luxe cotés, presse spécialisée) avant d'être fixée. Aucune de ces sources
+ne documente les chiffres internes d'une maison en particulier — ce ne sont
+pas des données confidentielles — mais elles donnent des ordres de grandeur
+crédibles pour calibrer un jeu de données synthétique.
+
+| Hypothèse du projet | Source | Ce que dit la source | Calibration retenue |
+|---|---|---|---|
+| Concentration de la valeur client | [Business of Fashion — "How Luxury Brands Court the 1 Percent"](https://www.businessoffashion.com/articles/luxury/how-luxury-brands-court-the-1-percent/) | Chez Mytheresa (e-commerce multi-marques de luxe), 3 % des clients génèrent 30 % du chiffre d'affaires ; selon Gary Wassner (Hilldun Group), les gros clients fidèles peuvent porter jusqu'à 40 % des ventes d'une maison de luxe. | Ajout d'un mécanisme de "pièces exceptionnelles" (achats rares, 3 à 9 fois le prix moyen de collection, réservés aux clients à forte affinité en Haute Joaillerie) : sur les données générées, les 3 % de clients les plus importants portent ~20-23 % du chiffre d'affaires simulé, et les tiers VIC + Very VIP (17 % des clients) en portent ~60 %. Directionnellement cohérent, sans viser une réplique exacte d'un cas particulier — Mytheresa est un modèle d'affaires différent (revendeur multi-marques) d'une maison mono-marque avec CRM boutique. |
+| Répartition et dynamique des 5 marchés | [Richemont — Résultats annuels FY25 (année close au 31 mars 2025)](https://www.richemont.com/news-media/press-releases-news/richemont-posts-robust-performance-for-the-year-ended-31-march-2025/) | Le segment Jewellery Maisons (Cartier, Van Cleef & Arpels) affiche +8 % de croissance sur l'exercice, avec de fortes disparités régionales : Amériques +16 %, Europe +10 %, Moyen-Orient & Afrique +15 %, **Japon +25 %** (le plus fort, porté par la clientèle touristique et un yen faible), **Asie-Pacifique -13 %** (Chine/Hong Kong/Macau en repli). | Confirme que les 5 marchés retenus (France siège, USA, Japon, Chine, Moyen-Orient) sont pertinents et que leur poids relatif dans le projet (France/USA/Chine plus grands, Japon/Moyen-Orient plus petits) reste plausible. **Limite assumée** : ce projet simule une photographie figée sur 24 mois, pas une tendance de croissance — il ne capture donc pas le retournement récent Japon ↑ / Chine ↓ observé dans la réalité 2024-2025. |
+| Marché mondial de la bijouterie — taille et canal | [Grand View Research — Jewelry Market Report](https://www.grandviewresearch.com/industry-analysis/jewelry-market) | Marché mondial estimé à 381,5 Md$ en 2025 ; répartition régionale Asie-Pacifique 60,4 %, Amérique du Nord 22,2 % ; distribution 83,9 % en magasin contre une croissance du canal en ligne à 8 % CAGR (implicitement ~16 % de part en ligne aujourd'hui). | Utilisé pour vérifier que la part d'acquisition digitale du projet (18-21 % selon les marchés) et la part omnicanale (~38 %) restent dans un ordre de grandeur cohérent avec un secteur encore majoritairement physique. **Limite assumée** : cette étude couvre l'ensemble du marché de la bijouterie (y compris bijouterie grand public, plus digitalisée), alors que la Très Haute Joaillerie reste structurellement plus dépendante du contact humain en boutique — le projet ne distingue pas ce niveau de granularité par catégorie. |
+| Contexte marché du luxe 2025 | [Bain & Company / Altagamma — Global luxury stays resilient... (2025)](https://www.bain.com/about/media-center/press-releases/20252/global-luxury-stays-resilient-despite-economic-headwinds-and-shifting-consumer-trends-that-reshape-marketbain--company-and-altagamma/) | Marché des biens de luxe personnels estimé à 364 Md€ en 2024, en repli à 358 Md€ en 2025 (-2 %) ; base de consommateurs de luxe en baisse (400M en 2022 → ~340M en 2025) ; acheteurs actifs en baisse (~60 % de la base adressable en 2022 → 40-45 % en 2025) ; acquisition de nouveaux clients en baisse de 5 % sur un an. | **Non intégré directement** au générateur : ce projet modélise une base de clients déjà acquis (taux d'actifs à 6 mois ~70 %), une mesure différente du taux de pénétration du marché total mesuré par Bain. Mentionné ici pour transparence — un vrai projet en production croiserait ces deux niveaux de lecture (marché total vs base CRM propriétaire). |
+
+**Pourquoi documenter cela plutôt que de simplement ajuster les chiffres en
+silence :** en entretien comme en poste, la vraie compétence n'est pas de
+produire un chiffre qui « sonne juste », mais de savoir dire précisément sur
+quoi une hypothèse s'appuie, et où s'arrêtent ses limites. C'est cette
+posture — plutôt que l'exactitude des chiffres eux-mêmes, impossible à
+garantir sur des données simulées — qui est le vrai objet de cette section.
+
+## 10. Limites et hypothèses assumées
 
 - Les taux de change utilisés sont **fixes** (illustratifs), alors qu'en
   production ils seraient historisés à la date de transaction — précisé pour
