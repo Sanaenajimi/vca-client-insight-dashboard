@@ -8,7 +8,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,450;9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-<script>(function(){var s=localStorage.getItem('maison-theme');var mq=window.matchMedia&&window.matchMedia('(prefers-color-scheme: dark)');var dark=s?s==='dark':(mq?mq.matches:true);document.documentElement.classList.toggle('dark',dark);})();</script>
+<script>(function(){var s=localStorage.getItem('maison-theme');var dark=s?s==='dark':true;document.documentElement.classList.toggle('dark',dark);})();</script>
 <style>
 :root{
   --background:#f8f3e9;--foreground:#2f1412;
@@ -36,8 +36,8 @@ html.dark{
   --shadow:0 1px 2px rgba(0,0,0,0.4),0 24px 60px -28px rgba(0,0,0,0.6);
   --header-bg:rgba(24,8,8,0.82);--tabs-bg:rgba(24,8,8,0.86);--strip-bg:rgba(50,26,25,0.7);
   --border-soft:rgba(62,43,40,0.6);--border-soft-70:rgba(62,43,40,0.7);--gold-line:rgba(228,182,92,0.6);
-  --pos:#6fbf82;--neg:#c36a51;--icon-bg:rgba(228,182,92,0.14);--delta-pos-bg:rgba(111,191,130,0.16);--delta-neg-bg:rgba(224,128,102,0.16);
-  --chart-1:#de8398;--chart-2:#e4b65c;--chart-3:#7fbb92;--chart-4:#729cb6;--chart-5:#e58a4f;--chart-6:#b491c2;
+  --pos:#6fbf82;--neg:#e08066;--icon-bg:rgba(228,182,92,0.14);--delta-pos-bg:rgba(111,191,130,0.16);--delta-neg-bg:rgba(224,128,102,0.16);
+  --chart-1:#e37992;--chart-2:#e4b65c;--chart-3:#7fbb92;--chart-4:#7fa8c2;--chart-5:#e58a4f;--chart-6:#b491c2;
 }
 *{box-sizing:border-box}
 html{scroll-behavior:smooth;scrollbar-color:var(--gold) var(--secondary);scrollbar-width:thin}
@@ -292,7 +292,6 @@ function render(id){viewsEl.innerHTML=`<section class="view active reveal">${vie
 document.getElementById('tabs').addEventListener('click',e=>{const b=e.target.closest('.tab');if(b)render(b.dataset.t);});
 render('overview');
 document.getElementById('theme').onclick=()=>{const d=document.documentElement.classList.toggle('dark');localStorage.setItem('maison-theme',d?'dark':'light');};
-if(window.matchMedia){window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change',e=>{if(!localStorage.getItem('maison-theme'))document.documentElement.classList.toggle('dark',e.matches);});}
 </script>
 </body>
 </html>
