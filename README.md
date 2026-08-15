@@ -3,11 +3,8 @@
 Projet portfolio construit pour une candidature au poste de **Data Analyst**,
 département **Client Insight & Data**, d'une maison de joaillerie de luxe.
 
-**Dashboard en ligne :** _(à publier via GitHub Pages — voir section Déploiement)_
-
 > **Toutes les données de ce projet sont 100% simulées.** Aucune donnée
-> réelle, logo, photo ou visuel d'une maison de joaillerie existante n'est
-> utilisé. Ce projet est un exercice pédagogique de portfolio technique.
+> réelle n'est utilisé. Ce projet est un exercice pédagogique de portfolio technique.
 
 ---
 
@@ -59,20 +56,6 @@ vca-client-insight-portfolio/
 └── requirements.txt
 ```
 
-## Reproduire le pipeline
-
-```bash
-pip install -r requirements.txt
-
-# 1. Génère les données clients / transactions / points de contact
-python data/generate_synthetic_data.py --n-customers 4000 --seed 42 --out-dir data
-
-# 2. Recalcule les indicateurs et exporte le JSON du dashboard
-python analysis/build_dashboard_data.py --data-dir data --out dashboard/vca_dashboard_data.json
-
-# 3. Ouvrir dashboard/vca_client_insight_dashboard.html dans un navigateur
-```
-
 Les requêtes SQL de `sql/` sont écrites en dialecte **Google BigQuery** ; elles
 sont fournies comme livrable de compétence technique (elles ciblent des tables
 `client_insight.customers` / `client_insight.transactions` qu'il faudrait
@@ -80,19 +63,6 @@ charger dans un projet BigQuery pour les exécuter telles quelles). La logique
 métier équivalente est réimplémentée en pandas dans `analysis/build_dashboard_data.py`,
 qui est le script réellement exécuté pour produire les données du dashboard.
 
-## Déploiement (GitHub Pages)
-
-GitHub Pages ne sert que la racine du repo (`/`) ou un dossier `/docs` — pas un
-nom de dossier arbitraire. Le dashboard est donc dupliqué dans `docs/index.html` :
-
-1. Pousser ce repo sur GitHub.
-2. Dans **Settings → Pages**, choisir *Deploy from a branch*, branche `main`, dossier **`/docs`**.
-3. Le dashboard est servi à `https://<utilisateur>.github.io/<repo>/`.
-
-Si vous régénérez les données, pensez à recopier le fichier mis à jour :
-```bash
-cp dashboard/vca_client_insight_dashboard.html docs/index.html
-```
 
 ## Choix de conception notables
 
@@ -119,9 +89,3 @@ cp dashboard/vca_client_insight_dashboard.html docs/index.html
   `kpi-documentation/documentation_kpis.md`, section 9 "Sources et
   calibration marché", pour le détail sourcé et les limites assumées.
 
-## Fichiers liés à cette candidature
-
-- `lettre_motivation_vca.docx` — lettre de motivation présentant ce portfolio
-- `guide_preparation_entretien_vca.docx` — guide de préparation à l'entretien (process en 3 étapes)
-
-_(livrés séparément, hors de ce repo de code)_
